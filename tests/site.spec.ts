@@ -25,6 +25,9 @@ test("exports the complete static narrative", async ({ page }) => {
     page.getByText("Kubernetes-based AI-training clusters"),
   ).toBeVisible();
   await expect(page.getByText("Practical Data Science Congress")).toBeVisible();
+  await expect(
+    page.locator('#imprint a[href="mailto:rene.glitza@nexufed.ai"]'),
+  ).toHaveText("rene.glitza@nexufed.ai");
 
   for (const project of projects)
     await expect(page.getByRole("heading", { name: project })).toBeAttached();
@@ -41,10 +44,13 @@ test("works without JavaScript", async ({ browser }) => {
   await expect(page.getByText("Portrait asset required")).toBeVisible();
   await page.locator("#imprint summary").focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator("#imprint")).toContainText("TODO before launch");
+  await expect(page.locator("#imprint")).toContainText("René Glitza");
+  await expect(page.locator("#imprint")).toContainText("c/o Auto-Intern GmbH");
+  await expect(page.locator("#imprint")).toContainText("Herner Str. 299");
   await page.locator("#privacy summary").focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator("#privacy")).toContainText("uses no analytics");
+  await expect(page.locator("#privacy")).toContainText("GitHub Pages");
+  await expect(page.locator("#privacy")).toContainText("Article 6(1)(f) GDPR");
 
   await context.close();
 });

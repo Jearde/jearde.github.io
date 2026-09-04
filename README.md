@@ -43,5 +43,4 @@ The technical build intentionally retains visible TODOs until these inputs are a
 
 - Portrait asset, usage rights, crop, and image-specific alt text.
 - Current public AI-Gruppe role and final NexuFL wording.
-- Public contact route, imprint details, and privacy-controller details.
 - Final factual and legal copy review.

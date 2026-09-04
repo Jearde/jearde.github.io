@@ -56,8 +56,9 @@ type SiteContent = {
   profiles: readonly Link[];
   affiliations: readonly { name: string; href: string }[];
   legal: {
-    imprint: readonly string[];
-    privacy: readonly string[];
+    email: string;
+    address: readonly string[];
+    privacyUpdated: string;
   };
 };
 
@@ -197,14 +198,14 @@ export const site = {
     { name: "open Skunkforce e.V.", href: "https://skunkforce.org" },
   ],
   legal: {
-    imprint: [
-      "TODO before launch: Add the approved responsible person or entity, postal address, and direct contact route.",
-      "No registration, professional, or business details have been inferred. This development placeholder is not legal advice.",
+    email: "rene.glitza@nexufed.ai",
+    address: [
+      "c/o Auto-Intern GmbH",
+      "Building B29",
+      "Herner Str. 299",
+      "44809 Bochum",
+      "Germany",
     ],
-    privacy: [
-      "This static website uses no analytics, advertising, tracking, cookies, local storage, contact-form backend, or owner-operated database.",
-      "GitHub Pages delivers the files and may process technically necessary request and server-log data under GitHub's own terms. Fonts, scripts, images, and presentation assets are served locally. External services receive a request only after you activate a link.",
-      "TODO before launch: Add approved controller contact details and have this notice reviewed for the final deployment context.",
-    ],
+    privacyUpdated: "4 September 2026",
   },
 } satisfies SiteContent;

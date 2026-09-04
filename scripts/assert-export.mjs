@@ -37,6 +37,13 @@ const requiredCopy = [
   "open Skunkforce",
   "Imprint",
   "Privacy",
+  "rene.glitza@nexufed.ai",
+  "c/o Auto-Intern GmbH",
+  "Building B29",
+  "Herner Str. 299",
+  "44809 Bochum",
+  "GitHub Pages",
+  "Article 6(1)(f) GDPR",
 ];
 
 for (const text of requiredCopy) {
@@ -45,12 +52,15 @@ for (const text of requiredCopy) {
 
 for (const forbidden of [
   "tel:",
-  "mailto:",
   "google-analytics.com",
   "googletagmanager.com",
 ]) {
   if (html.includes(forbidden))
     throw new Error(`Forbidden content in export: ${forbidden}`);
+}
+
+if (!html.includes('href="mailto:rene.glitza@nexufed.ai"')) {
+  throw new Error("Missing approved legal email link");
 }
 
 const localReferences = [

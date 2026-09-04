@@ -637,12 +637,47 @@ section {
   font-size: 1rem;
 }
 
-.legal-disclosures details div {
+.legal-copy {
   padding: 0 0 1.5rem;
 }
 
-.legal-disclosures p {
+.legal-copy section + section {
+  margin-top: 2rem;
+}
+
+.legal-copy h3,
+.legal-copy h4 {
+  color: var(--paper);
+}
+
+.legal-copy h3 {
+  margin: 1rem 0 1.5rem;
+  font-size: 1.1rem;
+}
+
+.legal-copy h4 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.legal-copy p {
   max-width: 55rem;
+}
+
+.legal-copy p + p {
+  margin-top: 0.8rem;
+}
+
+.legal-address {
+  display: grid;
+  margin: 0 0 1.5rem;
+  color: var(--paper);
+  font-style: normal;
+}
+
+.legal-copy a {
+  color: var(--paper);
+  text-underline-offset: 0.2em;
 }
 
 @supports (animation-timeline: view()) {
