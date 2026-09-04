@@ -77,7 +77,7 @@
 
 ## 10. Final QA And Launch Readiness
 
-- [ ] 10.1 Review final role, NexuFL, infrastructure, community, and contact copy with René and verify every published factual claim and external destination is approved and current.
+- [x] 10.1 Review final role, NexuFL, infrastructure, community, and contact copy with René and verify every published factual claim and external destination is approved and current.
 - [x] 10.2 Replace the portrait placeholder when an approved asset and alt description are available, and verify dimensions, crop, lazy loading, rights, structured-data image, and the 300 KB budget.
 - [ ] 10.3 Manually test current desktop and mobile browsers with keyboard, pointer, touch, reduced motion, JavaScript disabled, hidden-tab resume, and fast scrolling, and record that every acceptance scenario passes.
 - [ ] 10.4 Run production Lighthouse and verify Performance is at least 90 and Accessibility, Best Practices, and SEO are each at least 95 while the normal-motion canvas remains enabled.

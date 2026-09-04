@@ -136,10 +136,10 @@ export const site = {
     },
     {
       organization: "AI-Gruppe",
-      role: "Applied engineering",
+      role: "End-to-end systems engineering",
       href: "https://gruppe.ai",
       description:
-        "Software, electronics, measurement systems, condition monitoring, predictive maintenance, and technical projects moving into real use.",
+        "Hands-on implementation and technical leadership across PCB design, firmware, software, data science, and simulation, taking three products from proof of concept to international market launch.",
     },
   ],
   practice: [

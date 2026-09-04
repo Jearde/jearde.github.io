@@ -36,11 +36,3 @@ The initial canonical URL is configured once in `src/content/site.ts`. To move t
 5. Verify canonical metadata, Open Graph, robots, sitemap, JSON-LD, and apex/`www` redirects.
 
 Do not add a `gh-pages` branch. GitHub's Actions-based Pages deployment also does not need a repository `CNAME` file.
-
-## Launch Blockers
-
-The technical build intentionally retains visible TODOs until these inputs are approved:
-
-- Portrait asset, usage rights, crop, and image-specific alt text.
-- Current public AI-Gruppe role and final NexuFL wording.
-- Final factual and legal copy review.
