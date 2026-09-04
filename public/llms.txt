@@ -1,0 +1,10 @@
+# René Glitza
+
+> Researcher, builder, and founder working on distributed, private, real-world AI.
+
+René Glitza connects federated-learning and reinforcement-learning research with open-source ML systems, reproducible MLOps, Kubernetes AI-training infrastructure, industrial condition monitoring, and technical community work.
+
+Canonical profile: https://jearde.github.io
+GitHub: https://github.com/Jearde
+LinkedIn: https://www.linkedin.com/in/rene-glitza/
+ORCID: https://orcid.org/0009-0002-6437-5912
