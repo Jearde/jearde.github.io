@@ -82,7 +82,7 @@ Canonical metadata, sitemap, robots, structured data, and genuinely absolute ass
 
 #### Scenario: Initial site is deployed
 - **WHEN** the configured public URL is `https://jearde.github.io`
-- **THEN** every generated canonical absolute URL uses that origin
+- **THEN** every generated canonical absolute URL uses that origin and the canonical root and sitemap entry serialize as `https://jearde.github.io/`
 
 #### Scenario: Custom domain is activated
 - **WHEN** the configured public URL changes to `https://rene-glitza.de` and GitHub Pages and DNS are updated

@@ -18,6 +18,7 @@ test("exports the complete static narrative", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator("h1")).toContainText("René Glitza");
   await expect(page.locator("h1")).toContainText("Nerd with a");
   await expect(page.getByText("Researcher. Builder. Founder.")).toBeVisible();
   await expect(page.getByText("Ruhr University Bochum")).toBeVisible();
@@ -52,7 +53,9 @@ test("works without JavaScript", async ({ browser }) => {
   await page.goto("http://127.0.0.1:4173/#imprint");
 
   await expect(page.locator("main")).toContainText("NexuML");
-  await expect(page.getByText("Portrait asset required")).toBeVisible();
+  await expect(
+    page.locator('.portrait img[alt="Portrait of René Glitza"]'),
+  ).toBeVisible();
   await page.locator("#imprint summary").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#imprint")).toContainText("René Glitza");

@@ -56,6 +56,7 @@
 - [x] 7.5 Review visible identity and technical copy for natural inclusion of the required names, projects, research areas, Kubernetes, and MLOps, and verify no hidden keyword list or keyword stuffing was introduced.
 - [x] 7.6 Replace legal and contact placeholders with approved values when supplied, otherwise retain explicit TODOs and record the unresolved production-launch blocker; verify no CV phone number, unapproved email, or invented legal claim is emitted.
 - [x] 7.7 Inspect the built page's network requests during passive reading, and verify it loads no analytics, trackers, remote fonts, remote portraits, badges, embeds, cookies, or persistent browser storage and displays no cookie banner.
+- [x] 7.8 Consolidate the approved SEO metadata, H1 identity, canonical root, and linked ProfilePage/Person graph with specific work, membership, profile, expertise, and locality signals, and verify the exact static export values.
 
 ## 8. Automated Verification
 
@@ -77,7 +78,7 @@
 ## 10. Final QA And Launch Readiness
 
 - [ ] 10.1 Review final role, NexuFL, infrastructure, community, and contact copy with René and verify every published factual claim and external destination is approved and current.
-- [ ] 10.2 Replace the portrait placeholder when an approved asset and alt description are available, and verify dimensions, crop, lazy loading, rights, structured-data image, and the 300 KB budget.
+- [x] 10.2 Replace the portrait placeholder when an approved asset and alt description are available, and verify dimensions, crop, lazy loading, rights, structured-data image, and the 300 KB budget.
 - [ ] 10.3 Manually test current desktop and mobile browsers with keyboard, pointer, touch, reduced motion, JavaScript disabled, hidden-tab resume, and fast scrolling, and record that every acceptance scenario passes.
 - [ ] 10.4 Run production Lighthouse and verify Performance is at least 90 and Accessibility, Best Practices, and SEO are each at least 95 while the normal-motion canvas remains enabled.
 - [ ] 10.5 Measure route and site-authored JavaScript, fonts, portrait, social image, canvas buffer, LCP, CLS, and INP, and verify every explicit budget in `design.md` and `static-site-delivery/spec.md` is met.

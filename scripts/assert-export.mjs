@@ -12,6 +12,7 @@ const required = [
   "icon.svg",
   "apple-icon.png",
   "opengraph-image.jpg",
+  "images/rene-glitza.webp",
 ];
 
 for (const file of required) {
@@ -20,6 +21,8 @@ for (const file of required) {
 }
 
 const html = readFileSync(join(out, "index.html"), "utf8");
+const robots = readFileSync(join(out, "robots.txt"), "utf8");
+const sitemap = readFileSync(join(out, "sitemap.xml"), "utf8");
 const requiredCopy = [
   "René Glitza",
   "Nerd with a",
@@ -60,6 +63,39 @@ for (const forbidden of ["google-analytics.com", "googletagmanager.com"]) {
     throw new Error(`Forbidden content in export: ${forbidden}`);
 }
 
+const metadata = [
+  "<title>René Glitza – AI Researcher, NexuFed AI Co-Founder &amp; MLOps</title>",
+  '<meta name="description" content="Personal site of René Glitza. AI researcher at Ruhr University Bochum and Co-Founder at NexuFed AI specializing in Federated Learning, MLOps, and distributed systems."',
+  '<link rel="canonical" href="https://jearde.github.io/"',
+  '<meta property="og:title" content="René Glitza – AI Researcher &amp; Engineer"',
+  '<meta property="og:description" content="Adaptive &amp; Personalized Federated Learning, MLOps, and Industrial AI systems."',
+  '<meta property="og:url" content="https://jearde.github.io/"',
+  '<meta property="og:type" content="profile"',
+  '<meta property="profile:first_name" content="René"',
+  '<meta property="profile:last_name" content="Glitza"',
+];
+for (const value of metadata) {
+  if (!html.includes(value)) throw new Error(`Missing metadata: ${value}`);
+}
+
+if (
+  !/<h1>[\s\S]*René Glitza[\s\S]*Nerd with a[\s\S]*shirt\.[\s\S]*<\/h1>/.test(
+    html,
+  )
+) {
+  throw new Error("H1 does not connect René Glitza with the personal hook");
+}
+
+if (!robots.includes("User-Agent: *") || !robots.includes("Allow: /")) {
+  throw new Error("robots.txt does not allow all crawlers");
+}
+if (!robots.includes("Sitemap: https://jearde.github.io/sitemap.xml")) {
+  throw new Error("robots.txt does not reference the canonical sitemap");
+}
+if (!sitemap.includes("<loc>https://jearde.github.io/</loc>")) {
+  throw new Error("sitemap.xml does not contain the canonical root URL");
+}
+
 if (!html.includes('href="mailto:rene.glitza@nexufed.ai"')) {
   throw new Error("Missing approved legal email link");
 }
@@ -84,15 +120,80 @@ const jsonLdMatch = html.match(
   /<script type="application\/ld\+json">([^<]+)<\/script>/,
 );
 if (!jsonLdMatch) throw new Error("Missing JSON-LD graph");
+if (jsonLdMatch.index > html.indexOf("</head>")) {
+  throw new Error("JSON-LD graph is not in the document head");
+}
 const jsonLd = JSON.parse(jsonLdMatch[1]);
 if (jsonLd["@graph"]?.[0]?.["@type"] !== "ProfilePage") {
   throw new Error("JSON-LD does not begin with ProfilePage");
 }
+const person = jsonLd["@graph"]?.[1];
+if (person?.["@type"] !== "Person") {
+  throw new Error("JSON-LD does not contain a Person");
+}
 if (
-  jsonLd["@graph"]?.[1]?.["@type"] !== "Person" ||
-  jsonLd["@graph"][1].image
+  jsonLd["@graph"][0].mainEntity?.["@id"] !== person["@id"] ||
+  person["@id"] !== "https://jearde.github.io/#person"
 ) {
-  throw new Error("JSON-LD Person is invalid for the pending portrait state");
+  throw new Error("ProfilePage does not link to the stable Person ID");
+}
+for (const [key, value] of Object.entries({
+  alternateName: ["Jearde", "Rene Glitza"],
+  jobTitle: "Researcher & Co-Founder",
+  sameAs: [
+    "https://github.com/Jearde",
+    "https://www.linkedin.com/in/rene-glitza/",
+    "https://orcid.org/0009-0002-6437-5912",
+    "https://www.ika.ruhr-uni-bochum.de/ika/team/glitza.html.en",
+    "https://scholar.google.com/citations?user=tHPrZugAAAAJ&hl=de",
+    "https://www.researchgate.net/profile/Rene-Glitza",
+    "https://huggingface.co/jearde",
+    "https://hub.docker.com/repositories/jearde",
+    "https://x.com/GlitzaRene",
+    "https://www.facebook.com/rene.glitza/",
+  ],
+  knowsAbout: [
+    "Federated Learning",
+    "Machine Learning",
+    "MLOps",
+    "Reinforcement Learning",
+    "Acoustic Condition Monitoring",
+    "Kubernetes",
+  ],
+})) {
+  if (JSON.stringify(person[key]) !== JSON.stringify(value)) {
+    throw new Error(`JSON-LD Person has invalid ${key}`);
+  }
+}
+const expectedSubjectOf = [
+  [
+    "Ruhr University Bochum bibliography",
+    "https://bibliographie.ub.rub.de/person/25599",
+  ],
+  [
+    "Data Science Ruhr speaker profile",
+    "https://data-science.ruhr/speaker/rene-glitza/",
+  ],
+  [
+    "solutions: Hamburg speaker profile",
+    "https://solutions.hamburg/speaker/rene-glitza/",
+  ],
+];
+if (
+  JSON.stringify(person.subjectOf.map(({ name, url }) => [name, url])) !==
+  JSON.stringify(expectedSubjectOf)
+) {
+  throw new Error("JSON-LD Person has invalid subjectOf references");
+}
+if (
+  JSON.stringify(person.worksFor.map(({ name }) => name)) !==
+    JSON.stringify(["Ruhr University Bochum", "NexuFed AI", "AI-Gruppe"]) ||
+  JSON.stringify(person.memberOf.map(({ name }) => name)) !==
+    JSON.stringify(["open Skunkforce e.V.", "VDE Rhein-Ruhr e.V."]) ||
+  person.address?.addressLocality !== "Bochum" ||
+  person.address?.addressCountry !== "DE"
+) {
+  throw new Error("JSON-LD Person relationships are invalid");
 }
 
 const assetLimit = (file, bytes) => {
@@ -102,12 +203,12 @@ const assetLimit = (file, bytes) => {
 };
 
 assetLimit("opengraph-image.jpg", 250_000);
-if (existsSync(join(out, "images/rene-glitza.webp"))) {
-  assetLimit("images/rene-glitza.webp", 300_000);
-} else if (!html.includes("Portrait asset required")) {
-  throw new Error(
-    "Export has neither an approved portrait nor its placeholder",
-  );
+assetLimit("images/rene-glitza.webp", 300_000);
+if (!html.includes('alt="Portrait of René Glitza"')) {
+  throw new Error("Portrait is missing its approved alt text");
+}
+if (person.image !== "https://jearde.github.io/images/rene-glitza.webp") {
+  throw new Error("JSON-LD Person is missing the approved portrait");
 }
 
 const mediaDir = join(out, "_next/static/media");

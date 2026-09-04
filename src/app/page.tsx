@@ -13,35 +13,6 @@ const hasPortrait =
   Boolean(site.portrait.alt) &&
   existsSync(join(process.cwd(), "public", site.portrait.path));
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ProfilePage",
-      "@id": `${site.url}/#profile`,
-      url: site.url,
-      name: site.title,
-      mainEntity: { "@id": `${site.url}/#person` },
-    },
-    {
-      "@type": "Person",
-      "@id": `${site.url}/#person`,
-      name: site.name,
-      alternateName: site.alternateName,
-      url: site.url,
-      description: site.description,
-      sameAs: site.profiles.map((profile) => profile.href),
-      affiliation: site.affiliations.map((affiliation) => ({
-        "@type": "Organization",
-        name: affiliation.name,
-        url: affiliation.href,
-      })),
-      knowsAbout: site.research,
-      ...(hasPortrait ? { image: `${site.url}${site.portrait.path}` } : {}),
-    },
-  ],
-};
-
 export default function Home() {
   return (
     <>
@@ -54,12 +25,12 @@ export default function Home() {
         <main id="main-content">
           <section id="top" className="hero" data-narrative-section>
             <div className="hero-meta">
-              <p className="eyebrow">{site.name}</p>
               <p className="coordinate" title="Bochum, Germany">
                 51.47° N / 7.25° E
               </p>
             </div>
             <h1>
+              <span className="hero-person">{site.name}</span>
               <span>{site.hero.hook[0]}</span>
               <span>
                 {site.hero.hook[1]}
@@ -401,9 +372,6 @@ export default function Home() {
         </footer>
       </div>
       <NarrativeController />
-      <script type="application/ld+json">
-        {JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
-      </script>
     </>
   );
 }

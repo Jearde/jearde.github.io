@@ -16,7 +16,7 @@ The site SHALL present its substantive profile content as one scrolling page wit
 - **THEN** the browser lands on the corresponding section of the same page
 
 ### Requirement: Immediate personal identity
-The hero SHALL identify René Glitza by name, display “Nerd with a shirt. 👔” as the primary heading, display “Researcher. Builder. Founder.” as supporting identity, and use no more than one short supporting statement.
+The hero SHALL identify René Glitza by name within the single primary heading, display “Nerd with a shirt. 👔” as the stylized hook in that heading, display “Researcher. Builder. Founder.” as supporting identity, and use no more than one short supporting statement.
 
 #### Scenario: Visitor scans the hero
 - **WHEN** the initial page content is visible
@@ -79,7 +79,7 @@ The profile SHALL introduce René's portrait in the about or roles portion of th
 
 #### Scenario: Approved portrait is available
 - **WHEN** `public/images/rene-glitza.webp` is supplied
-- **THEN** the image appears with fixed dimensions, an intentional editorial crop, and alt text based on the actual photograph
+- **THEN** the image appears with fixed dimensions, an intentional editorial crop, and the approved alt text “Portrait of René Glitza”
 
 #### Scenario: Portrait is not available
 - **WHEN** the required portrait asset has not been supplied

@@ -56,7 +56,7 @@ Researcher. Builder. Founder.
 I build AI systems that learn from distributed, private, real-world data.
 ```
 
-The name is an eyebrow or small lead-in above the H1 so the personality lands first but identity remains immediate. The supporting statement remains one short sentence. There is no hero biography, portrait, button cluster, or badge row.
+The name is a small visible lead-in inside the H1 so the personality lands first, the established composition remains intact, and search and accessibility semantics connect the identity with the hook. The supporting statement remains one short sentence. There is no hero biography, portrait, button cluster, or badge row.
 
 The narrative order is:
 
@@ -115,7 +115,7 @@ Alternative considered: a dedicated component-library design system. Rejected be
 
 ### 3. Portrait placement and treatment
 
-The portrait appears in `#about`, offset from the text and integrated into the 12-column composition. A rectangular crop with a restrained reveal is preferable to a centered circular headshot. The image uses the contract `public/images/rene-glitza.webp`, a stable aspect ratio near 4:5, explicit dimensions, lazy loading, and an alt description written after viewing the approved photograph.
+The approved portrait appears in `#about`, offset from the text and integrated into the 12-column composition. It is cropped upward to 4:5 at 960×1200 so the head and upper torso remain intact, exported as `public/images/rene-glitza.webp` below 300 KB, rendered with explicit dimensions and lazy loading, and uses the alt text “Portrait of René Glitza”.
 
 If absent, render a fixed-aspect editorial placeholder with simple rules and “Portrait asset required.” The placeholder is not Person structured-data imagery and must not imitate a face. The public RUB or AI-Gruppe portraits must not be copied without explicit permission.
 
@@ -338,16 +338,16 @@ The deployment job uses concurrency group `pages` and `cancel-in-progress: false
 
 ### 14. SEO and structured data
 
-The base title is `René Glitza — Researcher, Builder, Founder`. The description should mention distributed and private AI, research-to-industry systems, and infrastructure naturally, without enumerating keywords.
+The title is `René Glitza – AI Researcher, NexuFed AI Co-Founder & MLOps`. The approved description identifies René's Ruhr University Bochum research, NexuFed AI co-founder role, Federated Learning, MLOps, and distributed systems without a hidden keyword list.
 
-Use a static Metadata object with `metadataBase` derived from `site.url`, canonical alternates, Open Graph data, and a Twitter/X large-image card. Use a static 1200×630 local `opengraph-image.jpg` rather than dynamic `ImageResponse` generation.
+Use a static Metadata object with `metadataBase` derived from `site.url`, canonical alternates, distinct approved Open Graph title and description, `profile` type with first and last name, and a Twitter/X large-image card. Use a static 1200×630 local `opengraph-image.jpg` rather than dynamic `ImageResponse` generation. Canonical root URLs include the trailing slash.
 
-The root page emits one escaped JSON-LD `@graph`:
+The root document head emits one escaped JSON-LD `@graph`:
 
-- `ProfilePage` identifies the page and points `mainEntity` to the Person.
-- `Person` includes `name: René Glitza`, `alternateName: Rene Glitza`, configured URL, approved portrait when present, concise role descriptions, appropriate affiliations, verified `sameAs` profiles, and focused `knowsAbout` values.
-- `sameAs` initially contains approved GitHub, LinkedIn, and ORCID profiles only.
-- Affiliations can name Ruhr University Bochum, NexuFed AI, AI-Gruppe, and open Skunkforce after final content approval.
+- `ProfilePage` identifies the page and points `mainEntity` to the stable `https://jearde.github.io/#person` ID.
+- `Person` includes `name: René Glitza`, alternate names `Jearde` and `Rene Glitza`, configured URL, `jobTitle: Researcher & Co-Founder`, the approved portrait, role relationships, verified profiles, focused `knowsAbout` values, and Bochum/DE locality.
+- `worksFor` names Ruhr University Bochum, NexuFed AI, and AI-Gruppe; `memberOf` names open Skunkforce e.V. and VDE Rhein-Ruhr e.V.
+- `sameAs` contains approved account and profile URLs; third-party bibliography and conference speaker pages use `subjectOf`.
 - No phone number, unapproved email, street address, or inferred identifier appears in structured data.
 
 Critical visible copy includes René Glitza and Rene Glitza naturally, along with Federated Learning, adaptive or personalized Federated Learning, Reinforcement Learning, Industrial AI, distributed AI, Edge AI, Kubernetes, MLOps, NexuFed AI, NexuML, pFedMARL, Ruhr University Bochum, AI-Gruppe, Practical Data Science Congress, and open Skunkforce. There is no hidden SEO copy.

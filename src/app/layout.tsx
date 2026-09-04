@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 
@@ -11,6 +14,51 @@ const geist = Geist({
   display: "optional",
 });
 
+const hasPortrait =
+  Boolean(site.portrait.alt) &&
+  existsSync(join(process.cwd(), "public", site.portrait.path));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${site.url}/#profile`,
+      url: site.url,
+      name: site.title,
+      mainEntity: { "@id": `${site.url}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      alternateName: site.structuredData.alternateName,
+      url: site.url,
+      description: site.description,
+      jobTitle: site.structuredData.jobTitle,
+      worksFor: site.structuredData.worksFor.map((organization) => ({
+        "@type": "Organization",
+        ...organization,
+      })),
+      memberOf: site.structuredData.memberOf.map((organization) => ({
+        "@type": "Organization",
+        ...organization,
+      })),
+      sameAs: site.structuredData.sameAs,
+      subjectOf: site.structuredData.subjectOf.map((page) => ({
+        "@type": "WebPage",
+        ...page,
+      })),
+      knowsAbout: site.structuredData.knowsAbout,
+      address: {
+        "@type": "PostalAddress",
+        ...site.structuredData.address,
+      },
+      ...(hasPortrait ? { image: `${site.url}${site.portrait.path}` } : {}),
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: site.title,
@@ -19,8 +67,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: "/",
-    title: site.title,
-    description: site.description,
+    title: site.openGraph.title,
+    description: site.openGraph.description,
+    firstName: site.openGraph.firstName,
+    lastName: site.openGraph.lastName,
     siteName: site.name,
     locale: site.locale,
     images: [
@@ -57,6 +107,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={geist.variable}>
+      <head>
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
+        </script>
+      </head>
       <body>{children}</body>
     </html>
   );

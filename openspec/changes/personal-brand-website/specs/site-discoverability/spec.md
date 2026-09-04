@@ -9,11 +9,11 @@ The exported page SHALL include an identity-focused title, concise description, 
 
 #### Scenario: Search engine reads metadata
 - **WHEN** a crawler retrieves the exported root document
-- **THEN** it finds the title “René Glitza — Researcher, Builder, Founder”, a concise relevant description, and a canonical URL for the configured public domain
+- **THEN** it finds the title “René Glitza – AI Researcher, NexuFed AI Co-Founder & MLOps”, the approved description, and the canonical URL `https://jearde.github.io/`
 
 #### Scenario: Social service creates a preview
 - **WHEN** a supported service expands the public site URL
-- **THEN** it receives a local static preview image, title, description, and absolute canonical URLs
+- **THEN** it receives a local static preview image, the approved Open Graph title and description, profile type and name properties, and the absolute canonical URL
 
 ### Requirement: Indexable substantive content
 René's name, alternate unaccented name, positioning, roles, featured work, infrastructure/MLOps practice, community activity, and core technical areas SHALL exist as visible text in the initial static HTML.
@@ -27,7 +27,7 @@ The page SHALL publish valid schema.org JSON-LD with a `ProfilePage` whose main 
 
 #### Scenario: Structured-data validator inspects the page
 - **WHEN** the exported page is submitted to a schema validator
-- **THEN** the graph identifies René by accented and alternate unaccented names, canonical URL, approved image, role descriptions, affiliations, knowledge areas, and verified public profiles without invented identifiers
+- **THEN** the graph identifies René by accented name, Jearde handle, alternate unaccented name, stable Person ID, canonical URL, approved image, job title, `worksFor` and `memberOf` relationships, knowledge areas, Bochum locality, and verified public profiles without invented identifiers
 
 #### Scenario: Portrait is pending
 - **WHEN** no approved portrait is available
@@ -52,4 +52,4 @@ The page SHALL use meaningful headings, link labels, landmarks, and natural tech
 
 #### Scenario: Search and accessibility semantics are audited
 - **WHEN** the exported document structure is inspected
-- **THEN** each section and link has a descriptive purpose and all search-relevant text is also useful visible content for visitors
+- **THEN** the single H1 includes René Glitza and the personal hook, each section and link has a descriptive purpose, and all search-relevant text is also useful visible content for visitors

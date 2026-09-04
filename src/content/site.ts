@@ -16,11 +16,16 @@ type Link = {
 
 type SiteContent = {
   name: string;
-  alternateName: string;
   url: string;
   title: string;
   description: string;
   locale: string;
+  openGraph: {
+    title: string;
+    description: string;
+    firstName: string;
+    lastName: string;
+  };
   hero: {
     hook: readonly [string, string];
     identity: string;
@@ -55,7 +60,19 @@ type SiteContent = {
     href: string;
   }[];
   profiles: readonly Link[];
-  affiliations: readonly { name: string; href: string }[];
+  structuredData: {
+    alternateName: readonly string[];
+    jobTitle: string;
+    worksFor: readonly { name: string; sameAs: string }[];
+    memberOf: readonly { name: string; sameAs: string }[];
+    sameAs: readonly string[];
+    subjectOf: readonly { name: string; url: string }[];
+    knowsAbout: readonly string[];
+    address: {
+      addressLocality: string;
+      addressCountry: string;
+    };
+  };
   legal: {
     email: string;
     phone: string;
@@ -75,12 +92,18 @@ export const navigation: readonly { id: SectionId; label: string }[] = [
 
 export const site = {
   name: "René Glitza",
-  alternateName: "Rene Glitza",
   url: "https://jearde.github.io",
-  title: "René Glitza — Researcher, Builder, Founder",
+  title: "René Glitza – AI Researcher, NexuFed AI Co-Founder & MLOps",
   description:
-    "René Glitza builds distributed and private AI systems, from federated-learning research and Kubernetes training infrastructure to industrial applications.",
+    "Personal site of René Glitza. AI researcher at Ruhr University Bochum and Co-Founder at NexuFed AI specializing in Federated Learning, MLOps, and distributed systems.",
   locale: "en_US",
+  openGraph: {
+    title: "René Glitza – AI Researcher & Engineer",
+    description:
+      "Adaptive & Personalized Federated Learning, MLOps, and Industrial AI systems.",
+    firstName: "René",
+    lastName: "Glitza",
+  },
   hero: {
     hook: ["Nerd with a", "shirt."],
     identity: "Researcher. Builder. Founder.",
@@ -94,7 +117,7 @@ export const site = {
   hobbies: ["Espresso", "Sailing", "Open-source smart home"],
   portrait: {
     path: "/images/rene-glitza.webp",
-    alt: null,
+    alt: "Portrait of René Glitza",
   },
   roles: [
     {
@@ -198,16 +221,63 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/rene-glitza/" },
     { label: "ORCID", href: "https://orcid.org/0009-0002-6437-5912" },
   ],
-  affiliations: [
-    {
-      name: "Ruhr University Bochum",
-      href: "https://www.ika.ruhr-uni-bochum.de/ika/team/glitza.html.en",
+  structuredData: {
+    alternateName: ["Jearde", "Rene Glitza"],
+    jobTitle: "Researcher & Co-Founder",
+    worksFor: [
+      {
+        name: "Ruhr University Bochum",
+        sameAs: "https://www.ruhr-uni-bochum.de/",
+      },
+      { name: "NexuFed AI", sameAs: "https://www.nexufed.ai" },
+      { name: "AI-Gruppe", sameAs: "https://gruppe.ai" },
+    ],
+    memberOf: [
+      { name: "open Skunkforce e.V.", sameAs: "https://skunkforce.org" },
+      {
+        name: "VDE Rhein-Ruhr e.V.",
+        sameAs: "https://www.vde-rhein-ruhr.de",
+      },
+    ],
+    sameAs: [
+      "https://github.com/Jearde",
+      "https://www.linkedin.com/in/rene-glitza/",
+      "https://orcid.org/0009-0002-6437-5912",
+      "https://www.ika.ruhr-uni-bochum.de/ika/team/glitza.html.en",
+      "https://scholar.google.com/citations?user=tHPrZugAAAAJ&hl=de",
+      "https://www.researchgate.net/profile/Rene-Glitza",
+      "https://huggingface.co/jearde",
+      "https://hub.docker.com/repositories/jearde",
+      "https://x.com/GlitzaRene",
+      "https://www.facebook.com/rene.glitza/",
+    ],
+    subjectOf: [
+      {
+        name: "Ruhr University Bochum bibliography",
+        url: "https://bibliographie.ub.rub.de/person/25599",
+      },
+      {
+        name: "Data Science Ruhr speaker profile",
+        url: "https://data-science.ruhr/speaker/rene-glitza/",
+      },
+      {
+        name: "solutions: Hamburg speaker profile",
+        url: "https://solutions.hamburg/speaker/rene-glitza/",
+      },
+    ],
+    knowsAbout: [
+      "Federated Learning",
+      "Machine Learning",
+      "MLOps",
+      "Reinforcement Learning",
+      "Acoustic Condition Monitoring",
+      "Kubernetes",
+    ],
+    address: {
+      addressLocality: "Bochum",
+      addressCountry: "DE",
     },
-    { name: "NexuFed AI", href: "https://www.nexufed.ai" },
-    { name: "AI-Gruppe", href: "https://gruppe.ai" },
-    { name: "open Skunkforce e.V.", href: "https://skunkforce.org" },
-    { name: "VDE Rhein-Ruhr e.V.", href: "https://www.vde-rhein-ruhr.de" },
-  ],
+  },
   legal: {
     email: "rene.glitza@nexufed.ai",
     phone: "+49 234 32 18591",

@@ -192,7 +192,6 @@ section {
   align-items: end;
 }
 
-.eyebrow,
 .coordinate,
 .section-number,
 .role-index,
@@ -204,10 +203,6 @@ section {
   font-size: 0.68rem;
   letter-spacing: 0.11em;
   text-transform: uppercase;
-}
-
-.eyebrow {
-  grid-column: 1 / 4;
 }
 
 .coordinate {
@@ -227,6 +222,16 @@ section {
 
 .hero h1 span {
   display: block;
+}
+
+.hero h1 .hero-person {
+  margin-bottom: 2rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .hero h1 > span:last-child {
