@@ -85,6 +85,14 @@ export default function Home() {
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+            <div className="off-hours">
+              <h3>Off hours</h3>
+              <ul>
+                {site.hobbies.map((hobby) => (
+                  <li key={hobby}>{hobby}</li>
+                ))}
+              </ul>
+            </div>
             <figure className="portrait">
               {hasPortrait ? (
                 <Image
@@ -253,6 +261,12 @@ export default function Home() {
                 <p>
                   Email:{" "}
                   <a href={`mailto:${site.legal.email}`}>{site.legal.email}</a>
+                </p>
+                <p>
+                  Phone:{" "}
+                  <a href={`tel:${site.legal.phone.replaceAll(" ", "")}`}>
+                    {site.legal.phone}
+                  </a>
                 </p>
               </div>
             </details>

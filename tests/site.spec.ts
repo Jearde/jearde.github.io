@@ -26,8 +26,19 @@ test("exports the complete static narrative", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByText("Practical Data Science Congress")).toBeVisible();
   await expect(
+    page.getByRole("link", { name: "VDE Rhein-Ruhr e.V." }),
+  ).toHaveAttribute("href", "https://www.vde-rhein-ruhr.de/youngnet");
+  await expect(page.locator(".off-hours li")).toHaveText([
+    "Espresso",
+    "Sailing",
+    "Open-source smart home",
+  ]);
+  await expect(
     page.locator('#imprint a[href="mailto:rene.glitza@nexufed.ai"]'),
   ).toHaveText("rene.glitza@nexufed.ai");
+  await expect(page.locator('#imprint a[href="tel:+492343218591"]')).toHaveText(
+    "+49 234 32 18591",
+  );
 
   for (const project of projects)
     await expect(page.getByRole("heading", { name: project })).toBeAttached();

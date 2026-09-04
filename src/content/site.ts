@@ -27,6 +27,7 @@ type SiteContent = {
     statement: string;
   };
   about: readonly string[];
+  hobbies: readonly string[];
   portrait: {
     path: string;
     alt: string | null;
@@ -57,6 +58,7 @@ type SiteContent = {
   affiliations: readonly { name: string; href: string }[];
   legal: {
     email: string;
+    phone: string;
     address: readonly string[];
     privacyUpdated: string;
   };
@@ -89,6 +91,7 @@ export const site = {
     "I work where machine-learning research meets systems engineering and industrial reality. My focus is not only the model, but the path that makes it reproducible, distributed, and useful.",
     "That path has taken me from acoustic condition monitoring and federated learning to open-source software, startup building, electronics, measurement systems, and the infrastructure that lets experiments become dependable practice.",
   ],
+  hobbies: ["Espresso", "Sailing", "Open-source smart home"],
   portrait: {
     path: "/images/rene-glitza.webp",
     alt: null,
@@ -182,6 +185,13 @@ export const site = {
         "An open technical community creating room for exchange, experimentation, and projects that benefit from collective effort.",
       href: "https://skunkforce.org",
     },
+    {
+      name: "VDE Rhein-Ruhr e.V.",
+      role: "Young Professionals Representative",
+      description:
+        "Connecting students and early-career engineers through regional exchange, technical events, and the wider VDE Young Net.",
+      href: "https://www.vde-rhein-ruhr.de/youngnet",
+    },
   ],
   profiles: [
     { label: "GitHub", href: "https://github.com/Jearde" },
@@ -196,9 +206,11 @@ export const site = {
     { name: "NexuFed AI", href: "https://www.nexufed.ai" },
     { name: "AI-Gruppe", href: "https://gruppe.ai" },
     { name: "open Skunkforce e.V.", href: "https://skunkforce.org" },
+    { name: "VDE Rhein-Ruhr e.V.", href: "https://www.vde-rhein-ruhr.de" },
   ],
   legal: {
     email: "rene.glitza@nexufed.ai",
+    phone: "+49 234 32 18591",
     address: [
       "c/o Auto-Intern GmbH",
       "Building B29",

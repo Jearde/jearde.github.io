@@ -35,9 +35,14 @@ const requiredCopy = [
   "ASN Database",
   "Practical Data Science Congress",
   "open Skunkforce",
+  "VDE Rhein-Ruhr",
+  "Espresso",
+  "Sailing",
+  "Open-source smart home",
   "Imprint",
   "Privacy",
   "rene.glitza@nexufed.ai",
+  "+49 234 32 18591",
   "c/o Auto-Intern GmbH",
   "Building B29",
   "Herner Str. 299",
@@ -50,17 +55,16 @@ for (const text of requiredCopy) {
   if (!html.includes(text)) throw new Error(`Missing static copy: ${text}`);
 }
 
-for (const forbidden of [
-  "tel:",
-  "google-analytics.com",
-  "googletagmanager.com",
-]) {
+for (const forbidden of ["google-analytics.com", "googletagmanager.com"]) {
   if (html.includes(forbidden))
     throw new Error(`Forbidden content in export: ${forbidden}`);
 }
 
 if (!html.includes('href="mailto:rene.glitza@nexufed.ai"')) {
   throw new Error("Missing approved legal email link");
+}
+if (!html.includes('href="tel:+492343218591"')) {
+  throw new Error("Missing approved legal phone link");
 }
 
 const localReferences = [
